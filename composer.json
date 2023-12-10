@@ -1,0 +1,21 @@
+{
+    "name": "dadandev/kosmetik",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "DadanDev\\Core\\": "_core/"
+        },
+        "files": [
+            "config.php",
+            "_core/system/functions/general.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "dadanhidyt",
+            "email": "dadanhidyt@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
