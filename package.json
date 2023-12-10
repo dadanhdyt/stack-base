@@ -1,0 +1,19 @@
+{
+  "name": "dadnadev",
+  "version": "1.0.0",
+  "description": "This project has been created using **webpack-cli**, you can now run",
+  "main": "index.js",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  },
+  "scripts": {
+    "dev" : "sass resources/scss/app.scss assets/build/css/main.min.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp-rename": "^2.0.0",
+    "sass": "^1.69.5"
+  }
+}

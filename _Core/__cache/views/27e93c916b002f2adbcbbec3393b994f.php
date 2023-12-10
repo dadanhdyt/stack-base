@@ -1,1 +1,0 @@
-<?php /**PATH G:\Project\WebsiteKosmetik\_Core\views/auth/login.blade.php ENDPATH**/ ?>
