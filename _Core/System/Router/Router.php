@@ -9,7 +9,7 @@ class Router
     {
         $this->routes = array_merge($this->routes, $routes);
     }
-    
+
     public function register(array $controllerRegistered)
     {
         $this->controllerRegistered = $controllerRegistered;
@@ -34,18 +34,37 @@ class Router
             }
         }
     }
+    public function runMiddleware($middleware)
+    {
+        if (is_array($middleware)) {
+            foreach ($middleware as $value) {
+                $middleware = new $value();
+                $middleware->before();
+            }
+        }
+        $middleware = new $middleware();
+        $middleware->before();
+    }
     public function run(string $urlServer = '/')
     {
         $this->parsingRoute();
-        foreach ($this->routes as $routes) {
-            $routePattern = str_replace(['id','slug'],['[0-9]+','[a-zA-Z0-9_-]+'],trim($routes['route'],'/'));
-            echo $routePattern;
-            if (preg_match('#^' . $routePattern . "$#", trim($urlServer,'/'), $params)) {
+        foreach ($this->routes as $key => $routes) {
+            $routePattern = str_replace(['id', 'slug'], ['[0-9]+', '[a-zA-Z0-9_-]+'], trim($routes['route'], '/'));
+            if (preg_match('#^' . $routePattern . "$#", trim($urlServer, '/'), $params)) {
                 $controller = new $routes['controller']();
                 $method = $routes['method'];
                 array_shift($params);
-                $controller->$method(...$params);
+                if ($_SERVER['REQUEST_METHOD'] == $key) {
+                    if (isset($routes['middleware']) && !empty($routes['middleware'])) {
+                        $this->runMiddleware($routes['middleware']);
+                    }
+                    return $controller->$method(...$params);
+                } else {
+                    http_response_code(405);
+                    return "Method Not Allowed";
+                }
             }
         }
+        return "Page Not Found";
     }
 }

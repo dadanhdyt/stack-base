@@ -15,7 +15,7 @@ require ROOT_DIR.'config.php';
 $router =  new DadanDev\Core\System\Router\Router();
 $router->register(require(ROOT_DIR.'ControllerRegister.php'));
 try{
-    $router->run($_SERVER['PATH_INFO'] ?? '/');
+    echo $router->run($_SERVER['PATH_INFO'] ?? '/');
 }catch(Exception $e){
     die($e->getMessage());
 }

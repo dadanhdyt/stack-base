@@ -17,5 +17,7 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "jenssegers/blade": "dev-master"
+    }
 }
